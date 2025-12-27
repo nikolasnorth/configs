@@ -24,10 +24,21 @@ ln -sf "$CONFIGS_DIR/tmux/.tmux.conf" ~/.tmux.conf
 mkdir -p ~/.config/ghostty
 ln -sf "$CONFIGS_DIR/ghostty/config" ~/.config/ghostty/config
 
+# Add git config include (if not already present)
+if ! grep -q "path = ~/code/configs/git/.gitconfig" ~/.gitconfig 2>/dev/null; then
+    echo "" >> ~/.gitconfig
+    echo "[include]" >> ~/.gitconfig
+    echo "	path = ~/code/configs/git/.gitconfig" >> ~/.gitconfig
+fi
+
 echo ""
-echo "Done! Symlinks created:"
+echo "Done!"
+echo ""
+echo "Symlinks created:"
 echo "  ~/.zshrc -> $CONFIGS_DIR/zsh/.zshrc"
 echo "  ~/.tmux.conf -> $CONFIGS_DIR/tmux/.tmux.conf"
 echo "  ~/.config/ghostty/config -> $CONFIGS_DIR/ghostty/config"
+echo ""
+echo "Git config included from: $CONFIGS_DIR/git/.gitconfig"
 echo ""
 echo "To apply changes, run: source ~/.zshrc"

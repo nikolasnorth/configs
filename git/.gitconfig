@@ -1,0 +1,20 @@
+# use neovim for commit messages
+[core]
+    editor = nvim
+
+# highlight moved lines in diffs
+[diff]
+    colorMoved = default
+
+# auto setup remote tracking on first push
+# git push just works, no need for git push -u origin branch
+[push]
+    autoSetupRemote = true
+
+# remove stale remote branches on fetch
+[fetch]
+    prune = true
+
+# sort branches by most recent commit
+[branch]
+    sort = -committerdate

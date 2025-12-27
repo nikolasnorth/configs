@@ -19,7 +19,7 @@ if [ "$OS" = "Darwin" ]; then
 
     # Install packages via Homebrew
     echo "Installing tools..."
-    brew install fd fzf neovim tmux zsh
+    brew install bat fd fzf neovim tmux zsh
     brew install --cask ghostty
 fi
 
@@ -35,6 +35,8 @@ ln -sf "$CONFIGS_DIR/zsh/.zshrc" ~/.zshrc
 ln -sf "$CONFIGS_DIR/tmux/.tmux.conf" ~/.tmux.conf
 mkdir -p ~/.config/nvim
 ln -sf "$CONFIGS_DIR/nvim/init.lua" ~/.config/nvim/init.lua
+mkdir -p ~/.config/bat
+ln -sf "$CONFIGS_DIR/bat/config" ~/.config/bat/config
 
 # Ghostty config (macOS only)
 if [ "$OS" = "Darwin" ]; then

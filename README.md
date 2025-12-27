@@ -10,6 +10,7 @@ Personal dotfiles for macOS and Linux. Gruvbox Material Dark theme everywhere.
 | `tmux/.tmux.conf` | tmux with vim keys, prefix `Ctrl+Space` |
 | `nvim/init.lua` | Neovim with lazy.nvim, treesitter, lualine |
 | `ghostty/config` | Ghostty terminal (macOS only) |
+| `bat/config` | bat with gruvbox theme |
 | `git/.gitconfig` | Shared git settings |
 
 ## Install
@@ -23,7 +24,7 @@ cd ~/code/configs
 **macOS:** Installs tools via Homebrew, creates symlinks, sets key repeat.
 
 **Linux:** Creates symlinks only. Install prerequisites first:
-- zsh, tmux, neovim, fzf, git
+- zsh, tmux, neovim, fzf, fd, bat, git
 
 ## Key Bindings
 

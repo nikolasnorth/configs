@@ -42,6 +42,17 @@ vim.opt.tabstop = 4
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+-- Highlight yanked text briefly
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function() vim.highlight.on_yank() end
+})
+
+-- Keep cursor away from edges when scrolling
+vim.opt.scrolloff = 8
+
+-- Persistent undo (survives closing file)
+vim.opt.undofile = true
+
 -- Gruvbox Material Dark theme
 vim.opt.background = "dark"
 vim.g.gruvbox_material_background = "medium"

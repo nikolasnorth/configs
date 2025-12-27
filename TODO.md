@@ -1,8 +1,14 @@
-# Future additions
+# Linux prerequisites
 
-## Configs
-- [ ] git/.gitconfig - aliases, default editor, default branch
-- [ ] nvim/ - neovim configuration
+Install these before running `./install.sh` on Linux:
+
+- zsh
+- tmux
+- neovim
+- fzf
+- git
+
+# Future additions
 
 ## CLI tools
 - [ ] ripgrep (rg) - faster grep

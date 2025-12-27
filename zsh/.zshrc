@@ -27,3 +27,6 @@ bindkey '^N' history-beginning-search-forward
 # use neovim as default editor
 export EDITOR="nvim"
 export VISUAL="nvim"
+
+# fzf - fuzzy finder
+eval "$(fzf --zsh)"

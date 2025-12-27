@@ -1,3 +1,6 @@
+# source pre-config if exists (for stuff that must be at top)
+[[ -f ~/.zshrc.pre ]] && source ~/.zshrc.pre
+
 # alias
 alias ll='ls -la'
 alias gits='git status'
@@ -47,3 +50,6 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
+
+# source local config if exists (for machine-specific stuff)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

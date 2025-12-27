@@ -20,7 +20,7 @@ if [ "$OS" = "Darwin" ]; then
     # Install packages via Homebrew
     echo "Installing tools..."
     brew install bat fd fzf neovim tmux zsh
-    brew install --cask ghostty
+    brew install --cask ghostty raycast
 fi
 
 # Clone fzf-git.sh (if not already present)
@@ -104,4 +104,6 @@ if [ "$OS" = "Darwin" ]; then
     echo "  2. Set 'nikolas' as the default profile"
     echo "  3. Go to about:config and set:"
     echo "     toolkit.legacyUserProfileCustomizations.stylesheets = true"
+    echo ""
+    echo "Raycast: Open Raycast to complete setup"
 fi

@@ -11,7 +11,8 @@ alias gitc='git commit'
 autoload -Uz vcs_info
 precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats ' (%b)'
-PROMPT="%F{green}%n%f %F{blue}%~%f${vcs_info_msg_0_} | "
+setopt PROMPT_SUBST
+PROMPT='%F{green}%n%f %F{blue}%~%f${vcs_info_msg_0_} | '
 
 # better globbing
 setopt EXTENDED_GLOB

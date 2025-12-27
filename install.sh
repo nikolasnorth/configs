@@ -19,7 +19,7 @@ if [ "$OS" = "Darwin" ]; then
 
     # Install packages via Homebrew
     echo "Installing tools..."
-    brew install fzf neovim tmux zsh
+    brew install fd fzf neovim tmux zsh
     brew install --cask ghostty
 fi
 

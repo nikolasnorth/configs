@@ -58,6 +58,28 @@ if [ "$OS" = "Darwin" ]; then
     defaults write NSGlobalDomain InitialKeyRepeat -int 15
 fi
 
+# Firefox profile setup (macOS only)
+if [ "$OS" = "Darwin" ]; then
+    FIREFOX_PROFILE=~/.mozilla/firefox/profiles/nikolas
+    FIREFOX_BIN="/Applications/Firefox.app/Contents/MacOS/firefox"
+
+    # Create Firefox profile if it doesn't exist
+    if [ ! -d "$FIREFOX_PROFILE" ]; then
+        echo "Creating Firefox profile..."
+        "$FIREFOX_BIN" -CreateProfile "nikolas $FIREFOX_PROFILE"
+    fi
+
+    # Try to download latest userChrome.css, fall back to local copy
+    CHROME_URL="https://raw.githubusercontent.com/jonhoo/configs/master/gui/.mozilla/firefox/chrome/userChrome.css"
+    mkdir -p "$FIREFOX_PROFILE/chrome"
+    if curl -fsSL "$CHROME_URL" -o "$CONFIGS_DIR/firefox/userChrome.css" 2>/dev/null; then
+        echo "Downloaded latest userChrome.css"
+    else
+        echo "Download failed, using local copy"
+    fi
+    ln -sf "$CONFIGS_DIR/firefox/userChrome.css" "$FIREFOX_PROFILE/chrome/userChrome.css"
+fi
+
 echo ""
 echo "Done!"
 echo ""
@@ -76,4 +98,10 @@ echo "To apply changes, run: source ~/.zshrc"
 if [ "$OS" = "Darwin" ]; then
     echo ""
     echo "NOTE: Log out and back in for key repeat settings to take effect."
+    echo ""
+    echo "Firefox setup:"
+    echo "  1. Open Firefox and go to about:profiles"
+    echo "  2. Set 'nikolas' as the default profile"
+    echo "  3. Go to about:config and set:"
+    echo "     toolkit.legacyUserProfileCustomizations.stylesheets = true"
 fi

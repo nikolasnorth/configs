@@ -15,19 +15,19 @@ fi
 # Install tools
 echo "Installing tools..."
 brew install fzf neovim tmux
+brew install --cask ghostty
 
 # Create symlinks
 echo "Creating symlinks..."
 ln -sf "$CONFIGS_DIR/zsh/.zshrc" ~/.zshrc
 ln -sf "$CONFIGS_DIR/tmux/.tmux.conf" ~/.tmux.conf
+mkdir -p ~/.config/ghostty
+ln -sf "$CONFIGS_DIR/ghostty/config" ~/.config/ghostty/config
 
 echo ""
 echo "Done! Symlinks created:"
 echo "  ~/.zshrc -> $CONFIGS_DIR/zsh/.zshrc"
 echo "  ~/.tmux.conf -> $CONFIGS_DIR/tmux/.tmux.conf"
+echo "  ~/.config/ghostty/config -> $CONFIGS_DIR/ghostty/config"
 echo ""
 echo "To apply changes, run: source ~/.zshrc"
-echo ""
-echo "NOTE: iTerm theme must be imported manually:"
-echo "  iTerm2 > Settings > Profiles > Colors > Color Presets > Import"
-echo "  Then select: $CONFIGS_DIR/iterm/gruvbox-dark.itermcolors"

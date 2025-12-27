@@ -1,0 +1,18 @@
+# font
+font-family = JetBrains Mono
+font-size = 13
+
+# theme
+theme = Gruvbox Material Dark
+background-opacity = 0.95
+
+# window
+window-padding-x = 10
+confirm-close-surface = false
+
+# cursor
+cursor-style = block
+cursor-style-blink = false
+
+# fix shift+enter for claude code
+keybind = shift+enter=text:\x1b\r

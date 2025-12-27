@@ -30,6 +30,7 @@ export VISUAL="nvim"
 
 # fzf - fuzzy finder
 eval "$(fzf --zsh)"
+source ~/.config/fzf-git.sh/fzf-git.sh
 
 # use fd with fzf
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"

@@ -23,6 +23,12 @@ if [ "$OS" = "Darwin" ]; then
     brew install --cask ghostty
 fi
 
+# Clone fzf-git.sh (if not already present)
+if [ ! -d ~/.config/fzf-git.sh ]; then
+    echo "Cloning fzf-git.sh..."
+    git clone https://github.com/junegunn/fzf-git.sh.git ~/.config/fzf-git.sh
+fi
+
 # Create symlinks (both macOS and Linux)
 echo "Creating symlinks..."
 ln -sf "$CONFIGS_DIR/zsh/.zshrc" ~/.zshrc

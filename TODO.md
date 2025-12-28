@@ -14,5 +14,4 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 - [ ] eza - modern ls with git status
 - [ ] zoxide - smarter cd
 - [ ] lazygit - terminal UI for git
-- [ ] delta - better git diffs
 - [ ] jq - JSON processor

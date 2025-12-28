@@ -20,7 +20,7 @@ fi
 # Install tools via Homebrew (if available)
 if command -v brew &> /dev/null; then
     echo "Installing tools..."
-    brew install bat fd fzf neovim tmux zsh
+    brew install bat fd fzf git-delta neovim tmux zsh
 
     # macOS-only casks
     if [ "$OS" = "Darwin" ]; then

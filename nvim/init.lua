@@ -12,6 +12,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Set leader key to space (must be before plugins load)
+vim.g.mapleader = " "
+
 -- Install plugins (if not already installed)
 require("lazy").setup({
   {
@@ -28,6 +31,17 @@ require("lazy").setup({
   },
   { "nvim-lualine/lualine.nvim" },  -- status line
   { "sainnhe/gruvbox-material" },
+  {
+    "lewis6991/gitsigns.nvim",
+    lazy = false,
+    config = function()
+      require("gitsigns").setup()
+    end,
+    keys = {
+      { "<leader>gb", "<cmd>Gitsigns blame_line<cr>", desc = "Git blame line" },
+      { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview git changes" },
+    },
+  },
 }, {
     defaults = { lazy = true },
     install = { colorscheme = { "gruvbox-material" } },

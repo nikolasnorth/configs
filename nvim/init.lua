@@ -14,7 +14,18 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Install plugins (if not already installed)
 require("lazy").setup({
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    lazy = false,
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "bash", "java", "json", "lua", "markdown", "python", "ruby", "rust", "typescript" },
+        highlight = { enable = true },
+        indent = { enable = true },
+      })
+    end,
+  },
   { "nvim-lualine/lualine.nvim" },  -- status line
   { "sainnhe/gruvbox-material" },
 }, {

@@ -8,6 +8,7 @@
     navigate = true
     side-by-side = true
     line-numbers = true
+    syntax-theme = gruvbox-dark
 
 # highlight moved lines in diffs
 [diff]

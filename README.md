@@ -1,6 +1,6 @@
 # configs
 
-Personal dotfiles for macOS and Linux. Gruvbox Material Dark theme everywhere.
+Personal dotfiles for macOS and Linux..
 
 ## What's Included
 
@@ -21,10 +21,14 @@ cd ~/code/configs
 ./install.sh
 ```
 
-**macOS:** Installs tools via Homebrew, creates symlinks, sets key repeat.
+**macOS:** Automatically installs Homebrew, then installs tools via brew.
 
-**Linux:** Creates symlinks only. Install prerequisites first:
-- zsh, tmux, neovim, fzf, fd, bat, git
+**Linux:** Requires Homebrew to be installed first:
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+```
+Then run `./install.sh` to install tools via brew.
 
 ## Key Bindings
 

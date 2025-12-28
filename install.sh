@@ -111,6 +111,11 @@ if [ "$OS" = "Darwin" ]; then
     echo "  2. Set 'nikolas' as the default profile"
     echo "  3. Go to about:config and set:"
     echo "     toolkit.legacyUserProfileCustomizations.stylesheets = true"
+    echo "  4. Install extensions:"
+    echo "     - Vimium C: https://addons.mozilla.org/en-US/firefox/addon/vimium-c/"
+    echo "     - Dark Reader: https://addons.mozilla.org/en-US/firefox/addon/darkreader/"
+    echo "     - uBlock Origin: https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/"
+    echo "     - Gruvbox Material Theme: https://addons.mozilla.org/en-US/firefox/addon/gruvbox-material-theme/"
     echo ""
     echo "Raycast: Open Raycast to complete setup"
 fi

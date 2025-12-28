@@ -1,14 +1,11 @@
 # Linux prerequisites
 
-Install these before running `./install.sh` on Linux:
+Install Homebrew (Linuxbrew) before running `./install.sh`:
 
-- zsh
-- tmux
-- neovim
-- fzf
-- fd
-- bat
-- git
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+```
 
 # Future additions
 

@@ -8,19 +8,26 @@ OS="$(uname -s)"
 echo "Installing configs from $CONFIGS_DIR"
 echo "Detected OS: $OS"
 
-# Install tools (macOS only)
+# Install Homebrew (macOS only)
 if [ "$OS" = "Darwin" ]; then
-    # Install Homebrew if needed
     if ! command -v brew &> /dev/null; then
         echo "Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
+fi
 
-    # Install packages via Homebrew
+# Install tools via Homebrew (if available)
+if command -v brew &> /dev/null; then
     echo "Installing tools..."
     brew install bat fd fzf neovim tmux zsh
-    brew install --cask ghostty raycast
+
+    # macOS-only casks
+    if [ "$OS" = "Darwin" ]; then
+        brew install --cask ghostty raycast
+    fi
+else
+    echo "Homebrew not found. Please install prerequisites manually (see TODO.md)"
 fi
 
 # Clone fzf-git.sh (if not already present)

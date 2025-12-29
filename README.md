@@ -1,6 +1,6 @@
 # configs
 
-Personal dotfiles for macOS and Linux..
+Personal dotfiles for macOS and Linux.
 
 ## What's Included
 
@@ -8,7 +8,7 @@ Personal dotfiles for macOS and Linux..
 |--------|-------------|
 | `zsh/.zshrc` | Zsh with fzf integration |
 | `tmux/.tmux.conf` | tmux with vim keys, prefix `Ctrl+Space` |
-| `nvim/init.lua` | Neovim with lazy.nvim, treesitter, lualine |
+| `nvim/init.lua` | Neovim with treesitter, gitsigns, lualine |
 | `ghostty/config` | Ghostty terminal (macOS only) |
 | `bat/config` | bat with gruvbox theme |
 | `git/.gitconfig` | Shared git settings |
@@ -37,6 +37,20 @@ Then run `./install.sh` to install tools via brew.
 - `|` - split horizontal
 - `-` - split vertical
 - `r` - reload config
+
+**nvim** (leader: `Space`)
+- `Space gb` - git blame line
+- `Space gp` - preview git changes
+
+## Neovim Plugins
+
+| Plugin | Purpose |
+|--------|---------|
+| lazy.nvim | Plugin manager |
+| nvim-treesitter | Syntax highlighting |
+| gitsigns.nvim | Git gutter signs, blame |
+| lualine.nvim | Status line |
+| gruvbox-material | Theme |
 
 ## Theme
 

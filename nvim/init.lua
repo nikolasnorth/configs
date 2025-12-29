@@ -32,6 +32,13 @@ require("lazy").setup({
   { "nvim-lualine/lualine.nvim" },  -- status line
   { "sainnhe/gruvbox-material" },
   {
+    "numToStr/Comment.nvim",
+    lazy = false,
+    config = function()
+      require("Comment").setup()
+    end,
+  },
+  {
     "lewis6991/gitsigns.nvim",
     lazy = false,
     config = function()
@@ -51,6 +58,9 @@ require("lazy").setup({
 -- Enable line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
+
+-- Always show sign column (prevents editor shift when git signs appear)
+vim.opt.signcolumn = "yes"
 
 -- Use system clipboard
 vim.opt.clipboard = "unnamedplus"

@@ -49,6 +49,7 @@ Then run `./install.sh` to install tools via brew.
 | lazy.nvim | Plugin manager |
 | nvim-treesitter | Syntax highlighting |
 | gitsigns.nvim | Git gutter signs, blame |
+| Comment.nvim | Toggle comments (`gcc`) |
 | lualine.nvim | Status line |
 | gruvbox-material | Theme |
 

@@ -10,7 +10,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # Future additions
 
 ## CLI tools
-- [ ] ripgrep (rg) - faster grep
 - [ ] eza - modern ls with git status
 - [ ] zoxide - smarter cd
 - [ ] lazygit - terminal UI for git

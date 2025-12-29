@@ -56,6 +56,17 @@ require("lazy").setup({
       { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview git changes" },
     },
   },
+  {
+    "ibhagwan/fzf-lua",
+    lazy = false,
+    keys = {
+      { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find files" },
+      { "<leader>fg", "<cmd>FzfLua live_grep<cr>", desc = "Live grep" },
+      { "<leader>fb", "<cmd>FzfLua buffers<cr>", desc = "Find buffers" },
+      { "<leader>fh", "<cmd>FzfLua help_tags<cr>", desc = "Help tags" },
+      { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent files" },
+    },
+  },
 }, {
     defaults = { lazy = true },
     install = { colorscheme = { "gruvbox-material" } },

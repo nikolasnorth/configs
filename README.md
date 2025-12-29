@@ -39,6 +39,10 @@ Then run `./install.sh` to install tools via brew.
 - `r` - reload config
 
 **nvim** (leader: `Space`)
+- `Space ff` - find files
+- `Space fg` - live grep
+- `Space fb` - find buffers
+- `Space fr` - recent files
 - `Space gb` - git blame line
 - `Space gp` - preview git changes
 
@@ -49,6 +53,7 @@ Then run `./install.sh` to install tools via brew.
 | lazy.nvim | Plugin manager |
 | nvim-treesitter | Syntax highlighting |
 | gitsigns.nvim | Git gutter signs, blame |
+| fzf-lua | Fuzzy finder |
 | Comment.nvim | Toggle comments (`gcc`) |
 | nvim-autopairs | Auto-close brackets, quotes |
 | lualine.nvim | Status line |

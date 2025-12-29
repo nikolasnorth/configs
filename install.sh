@@ -2,10 +2,26 @@
 
 set -e
 
+# Parse arguments
+MODE=""
+for arg in "$@"; do
+    case $arg in
+        --home) MODE="home" ;;
+        --work) MODE="work" ;;
+    esac
+done
+
+if [ -z "$MODE" ]; then
+    echo "Usage: ./install.sh --home | --work"
+    echo "  --home  Install all tools including personal ones (Claude Code)"
+    echo "  --work  Install shared tools only"
+    exit 1
+fi
+
 CONFIGS_DIR="$(cd "$(dirname "$0")" && pwd)"
 OS="$(uname -s)"
 
-echo "Installing configs from $CONFIGS_DIR"
+echo "Installing configs from $CONFIGS_DIR (mode: $MODE)"
 echo "Detected OS: $OS"
 
 # Install Homebrew (macOS only)
@@ -26,6 +42,19 @@ if command -v brew &> /dev/null; then
     if [ "$OS" = "Darwin" ]; then
         brew install --cask ghostty raycast
     fi
+
+    # Home-only tools
+    if [ "$MODE" = "home" ]; then
+        # Install nvm and node
+        if [ ! -d "$HOME/.nvm" ]; then
+            echo "Installing nvm..."
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+        fi
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        nvm install --lts
+        npm install -g @anthropic-ai/claude-code
+    fi
 else
     echo "Homebrew not found. Please install prerequisites manually (see TODO.md)"
 fi
@@ -44,6 +73,8 @@ mkdir -p ~/.config/nvim
 ln -sf "$CONFIGS_DIR/nvim/init.lua" ~/.config/nvim/init.lua
 mkdir -p ~/.config/bat
 ln -sf "$CONFIGS_DIR/bat/config" ~/.config/bat/config
+mkdir -p ~/.claude
+ln -sf "$CONFIGS_DIR/claude/settings.json" ~/.claude/settings.json
 
 # Ghostty config (macOS only)
 if [ "$OS" = "Darwin" ]; then

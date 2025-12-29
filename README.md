@@ -12,13 +12,15 @@ Personal dotfiles for macOS and Linux.
 | `ghostty/config` | Ghostty terminal (macOS only) |
 | `bat/config` | bat with gruvbox theme |
 | `git/.gitconfig` | Shared git settings |
+| `claude/settings.json` | Claude Code settings |
 
 ## Install
 
 ```bash
 git clone https://github.com/nikolas/configs.git ~/code/configs
 cd ~/code/configs
-./install.sh
+./install.sh --home   # personal machine (includes Claude Code)
+./install.sh --work   # work machine
 ```
 
 **macOS:** Automatically installs Homebrew, then installs tools via brew.

@@ -67,18 +67,36 @@ require("lazy").setup({
       { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent files" },
     },
   },
+  {
+    "folke/which-key.nvim",
+    lazy = false,
+    config = function()
+      require("which-key").setup({
+        triggers = { "<leader>" },
+        delay = 500,  -- ms before popup appears
+      })
+    end,
+  },
 }, {
     defaults = { lazy = true },
     install = { colorscheme = { "gruvbox-material" } },
     ui = { open_on_start = false },  -- <--- this disables the dashboard
 })
 
--- Enable line numbers
+-- Enable line numbers and sign column
 vim.opt.number = true
 vim.opt.relativenumber = true
-
--- Always show sign column (prevents editor shift when git signs appear)
 vim.opt.signcolumn = "yes"
+
+-- Re-apply settings when entering buffers. Fixes issue where Lazy plugin
+-- manager's install UI disables these settings and doesn't restore them.
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.opt_local.number = true
+    vim.opt_local.relativenumber = true
+    vim.opt_local.signcolumn = "yes"
+  end
+})
 
 -- Use system clipboard
 vim.opt.clipboard = "unnamedplus"

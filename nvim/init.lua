@@ -39,6 +39,13 @@ require("lazy").setup({
     end,
   },
   {
+    "windwp/nvim-autopairs",
+    lazy = false,
+    config = function()
+      require("nvim-autopairs").setup()
+    end,
+  },
+  {
     "lewis6991/gitsigns.nvim",
     lazy = false,
     config = function()

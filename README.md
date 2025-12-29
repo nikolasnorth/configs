@@ -50,6 +50,7 @@ Then run `./install.sh` to install tools via brew.
 | nvim-treesitter | Syntax highlighting |
 | gitsigns.nvim | Git gutter signs, blame |
 | Comment.nvim | Toggle comments (`gcc`) |
+| nvim-autopairs | Auto-close brackets, quotes |
 | lualine.nvim | Status line |
 | gruvbox-material | Theme |
 

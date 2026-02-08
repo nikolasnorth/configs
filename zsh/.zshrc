@@ -52,5 +52,8 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
+# add ~/.local/bin to PATH (used by Claude Code native install)
+export PATH="$HOME/.local/bin:$PATH"
+
 # source local config if exists (for machine-specific stuff)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

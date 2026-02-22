@@ -57,6 +57,12 @@ if [ ! -d ~/.config/fzf-git.sh ]; then
     git clone https://github.com/junegunn/fzf-git.sh.git ~/.config/fzf-git.sh
 fi
 
+# Back up existing config files if they're real files (not symlinks)
+if [ -f ~/.zshrc ] && [ ! -L ~/.zshrc ]; then
+    cp ~/.zshrc ~/.zshrc.backup
+    echo "Backed up existing ~/.zshrc to ~/.zshrc.backup"
+fi
+
 # Create symlinks (both macOS and Linux)
 echo "Creating symlinks..."
 ln -sf "$CONFIGS_DIR/zsh/.zshrc" ~/.zshrc

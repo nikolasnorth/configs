@@ -17,18 +17,12 @@ vim.g.mapleader = " "
 
 -- Install plugins (if not already installed)
 require("lazy").setup({
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    lazy = false,
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = { "bash", "java", "json", "lua", "markdown", "python", "ruby", "rust", "typescript" },
-        highlight = { enable = true },
-        indent = { enable = true },
-      })
-    end,
-  },
+  -- TODO: re-enable once nvim-treesitter API stabilizes
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
+  --   build = ":TSUpdate",
+  --   lazy = false,
+  -- },
   { "nvim-lualine/lualine.nvim" },  -- status line
   { "sainnhe/gruvbox-material" },
   {
@@ -123,6 +117,12 @@ vim.opt.scrolloff = 8
 
 -- Persistent undo (survives closing file)
 vim.opt.undofile = true
+
+-- Auto-reload files changed outside of nvim
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  command = "checktime",
+})
 
 -- Gruvbox Material Dark theme
 vim.opt.background = "dark"

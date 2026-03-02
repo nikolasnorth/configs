@@ -28,6 +28,10 @@ setopt SHARE_HISTORY  # enable
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
+# word navigation with option+arrow keys
+bindkey '\eb' backward-word
+bindkey '\ef' forward-word
+
 # use neovim as default editor
 export EDITOR="nvim"
 export VISUAL="nvim"

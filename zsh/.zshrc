@@ -2,7 +2,8 @@
 [[ -f ~/.zshrc.pre ]] && source ~/.zshrc.pre
 
 # alias
-alias ll='ls -la'
+alias ll='eza -la --icons --git --group-directories-first --time-style=relative'
+alias lt='eza --tree --icons --git --level=2'
 alias gits='git status'
 alias gitau='git add -u'
 alias gitc='git commit'
@@ -62,6 +63,9 @@ _fzf_compgen_dir() {
 
 # add ~/.local/bin to PATH (used by Claude Code native install)
 export PATH="$HOME/.local/bin:$PATH"
+
+# zoxide - smarter cd
+eval "$(zoxide init zsh)"
 
 # source local config if exists (for machine-specific stuff)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

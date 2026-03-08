@@ -74,6 +74,12 @@ ln -sf "$CONFIGS_DIR/bat/config" ~/.config/bat/config
 mkdir -p ~/.claude
 ln -sf "$CONFIGS_DIR/claude/settings.json" ~/.claude/settings.json
 
+# Home-only symlinks
+if [ "$MODE" = "home" ]; then
+    mkdir -p ~/.claude
+    ln -sf "$CONFIGS_DIR/claude/CLAUDE.md" ~/.claude/CLAUDE.md
+fi
+
 # Ghostty config (macOS only)
 if [ "$OS" = "Darwin" ]; then
     mkdir -p ~/.config/ghostty

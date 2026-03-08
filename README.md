@@ -6,13 +6,14 @@ Personal dotfiles for macOS and Linux.
 
 | Config | Description |
 |--------|-------------|
-| `zsh/.zshrc` | Zsh with fzf integration |
+| `zsh/.zshrc` | Zsh with fzf, eza, and zoxide |
 | `tmux/.tmux.conf` | tmux with vim keys, prefix `Ctrl+Space` |
 | `nvim/init.lua` | Neovim with treesitter, gitsigns, lualine |
 | `ghostty/config` | Ghostty terminal (macOS only) |
 | `bat/config` | bat with gruvbox theme |
 | `git/.gitconfig` | Shared git settings |
 | `claude/settings.json` | Claude Code settings |
+| `claude/CLAUDE.md` | Claude Code instructions (Conventional Commits) |
 
 ## Install
 

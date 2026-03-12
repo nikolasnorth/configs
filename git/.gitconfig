@@ -10,11 +10,6 @@
     line-numbers = true
     syntax-theme = gruvbox-dark
 
-[pager]
-    log = delta --paging=never
-    diff = delta --paging=never
-    show = delta --paging=never
-
 # highlight moved lines in diffs
 [diff]
     colorMoved = default

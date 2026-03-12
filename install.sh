@@ -40,7 +40,7 @@ if command -v brew &> /dev/null; then
 
     # macOS-only casks
     if [ "$OS" = "Darwin" ]; then
-        brew install --cask ghostty raycast
+        brew install --cask font-jetbrains-mono-nerd-font ghostty raycast
     fi
 
     # Home-only tools

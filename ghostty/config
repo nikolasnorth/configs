@@ -1,5 +1,5 @@
 # font
-font-family = JetBrains Mono
+font-family = JetBrainsMono Nerd Font
 font-size = 13
 
 # theme
@@ -19,3 +19,4 @@ cursor-color = #a9b665
 
 # fix shift+enter for claude code
 keybind = shift+enter=text:\x1b\r
+

@@ -33,8 +33,8 @@ bindkey '^N' history-beginning-search-forward
 bindkey '\eb' backward-word
 bindkey '\ef' forward-word
 
-# beam cursor for terminal (resets after nvim exits)
-reset_cursor() { echo -ne '\e[6 q' }
+# block cursor for terminal (resets after nvim exits)
+reset_cursor() { echo -ne '\e[2 q' }
 precmd_functions+=(reset_cursor)
 
 # use neovim as default editor

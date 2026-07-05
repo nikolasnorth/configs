@@ -12,3 +12,7 @@ Examples:
 - `fix(api): handle null responses in error handler`
 - `docs: update installation instructions`
 - `chore: update dependencies`
+
+# Reporting Style
+
+When reporting information to me, be extremely concise and sacrifice grammar for sake of concision.

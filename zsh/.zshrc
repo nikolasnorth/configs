@@ -4,6 +4,7 @@
 # alias
 alias ll='eza -la --icons --git --group-directories-first --time-style=relative'
 alias lt='eza --tree --icons --git --level=2'
+alias ca='claude agents'
 alias gits='git status'
 alias gitau='git add -u'
 alias gitc='git commit'

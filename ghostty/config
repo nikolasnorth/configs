@@ -3,8 +3,7 @@ font-family = JetBrainsMono Nerd Font
 font-size = 13
 
 # theme
-theme = Gruvbox Material Dark
-background-opacity = 0.95
+theme = Catppuccin Mocha
 
 # window
 window-padding-x = 10

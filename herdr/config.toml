@@ -4,6 +4,10 @@
 [theme]
 name = "catppuccin"
 
+[terminal]
+# new panes/tabs inherit cwd from the source pane/workspace
+new_cwd = "follow"
+
 [keys]
 # matches tmux prefix (tmux/.tmux.conf)
 prefix = "ctrl+space"

@@ -36,7 +36,7 @@ fi
 # Install tools via Homebrew (if available)
 if command -v brew &> /dev/null; then
     echo "Installing tools..."
-    brew install bat eza fd fzf git-delta neovim ripgrep tmux zoxide zsh
+    brew install bat eza fd fzf git-delta hunk neovim ripgrep tmux zoxide zsh
 
     # macOS-only casks
     if [ "$OS" = "Darwin" ]; then
@@ -90,6 +90,15 @@ fi
 if command -v herdr &> /dev/null; then
     mkdir -p ~/.config/herdr
     ln -sf "$CONFIGS_DIR/herdr/config.toml" ~/.config/herdr/config.toml
+    herdr plugin install edmundmiller/herdr-plugin-hunk --yes
+fi
+
+# Hunk config and bundled Claude Code skill (if installed)
+if command -v hunk &> /dev/null; then
+    mkdir -p ~/.config/hunk
+    ln -sf "$CONFIGS_DIR/hunk/config.toml" ~/.config/hunk/config.toml
+    mkdir -p ~/.claude/skills
+    ln -sf "$(brew --prefix hunk)/libexec/skills/hunk-review" ~/.claude/skills/hunk-review
 fi
 
 # Add git config include (if not already present)

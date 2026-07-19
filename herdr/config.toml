@@ -22,5 +22,23 @@ focus_pane_right = "prefix+l"
 split_vertical = "prefix+%"
 split_horizontal = "prefix+\""
 
+# hunk: review-first diff viewer for agent-authored changesets (hunk.dev)
+# via edmundmiller/herdr-plugin-hunk (`herdr plugin install`), opens in a
+# new tab rather than a popup or split pane
+[[keys.command]]
+key = "prefix+d"
+type = "plugin_action"
+command = "hunk.diff.worktree-tab"
+
+[[keys.command]]
+key = "prefix+u"
+type = "plugin_action"
+command = "hunk.diff.branch-tab"
+
+[[keys.command]]
+key = "prefix+shift+s"
+type = "plugin_action"
+command = "hunk.diff.staged-tab"
+
 [ui]
 sidebar_width = 26

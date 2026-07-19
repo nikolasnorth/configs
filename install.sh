@@ -86,6 +86,12 @@ if [ "$OS" = "Darwin" ]; then
     ln -sf "$CONFIGS_DIR/ghostty/config" ~/.config/ghostty/config
 fi
 
+# Herdr config (if installed)
+if command -v herdr &> /dev/null; then
+    mkdir -p ~/.config/herdr
+    ln -sf "$CONFIGS_DIR/herdr/config.toml" ~/.config/herdr/config.toml
+fi
+
 # Add git config include (if not already present)
 if ! grep -q "path = $CONFIGS_DIR/git/.gitconfig" ~/.gitconfig 2>/dev/null; then
     echo "" >> ~/.gitconfig
@@ -110,6 +116,9 @@ echo "  ~/.tmux.conf -> $CONFIGS_DIR/tmux/.tmux.conf"
 echo "  ~/.config/nvim/init.lua -> $CONFIGS_DIR/nvim/init.lua"
 if [ "$OS" = "Darwin" ]; then
     echo "  ~/.config/ghostty/config -> $CONFIGS_DIR/ghostty/config"
+fi
+if command -v herdr &> /dev/null; then
+    echo "  ~/.config/herdr/config.toml -> $CONFIGS_DIR/herdr/config.toml"
 fi
 echo ""
 echo "Git config included from:"

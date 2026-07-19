@@ -1,0 +1,22 @@
+# herdr configuration
+# See `herdr --default-config` for the full list of options.
+
+[theme]
+name = "catppuccin"
+
+[keys]
+# matches tmux prefix (tmux/.tmux.conf)
+prefix = "ctrl+space"
+
+# pane navigation, matches tmux h/j/k/l
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# splits, matches tmux defaults: % = side-by-side, " = stacked
+split_vertical = "prefix+%"
+split_horizontal = "prefix+\""
+
+[ui]
+sidebar_width = 26

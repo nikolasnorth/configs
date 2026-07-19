@@ -14,6 +14,7 @@ Personal dotfiles for macOS and Linux.
 | `git/.gitconfig` | Shared git settings |
 | `claude/settings.json` | Claude Code settings |
 | `claude/CLAUDE.md` | Claude Code instructions (Conventional Commits) |
+| `herdr/config.toml` | Herdr terminal workspace manager |
 
 ## Install
 

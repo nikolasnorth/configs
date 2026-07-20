@@ -29,13 +29,14 @@ HISTFILE=~/.zsh_history
 setopt APPEND_HISTORY # don't overwrite history, append instead
 setopt SHARE_HISTORY  # enable
 
-# inline suggestions based on history
-bindkey '^P' history-beginning-search-backward
-bindkey '^N' history-beginning-search-forward
+# cycle through history with cursor at end of recalled line
+bindkey '^P' up-line-or-history
+bindkey '^N' down-line-or-history
 
 # word navigation with option+arrow keys
 bindkey '\eb' backward-word
 bindkey '\ef' forward-word
+bindkey '^[^?' backward-kill-word  # Option+Backspace deletes previous word
 
 # block cursor for terminal (resets after nvim exits)
 reset_cursor() { echo -ne '\e[2 q' }

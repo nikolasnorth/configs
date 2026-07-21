@@ -17,6 +17,10 @@ cursor-style = block
 cursor-style-blink = false
 cursor-color = #a9b665
 
+# bell: play macOS alert sound when a program rings the terminal bell
+# (attention/dock-bounce and 🔔 title prefix are on by default)
+bell-features = system
+
 # fix shift+enter for claude code
 keybind = shift+enter=text:\x1b\r
 

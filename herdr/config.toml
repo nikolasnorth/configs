@@ -2,7 +2,7 @@
 # See `herdr --default-config` for the full list of options.
 
 [theme]
-name = "catppuccin"
+name = "catppuccin-mocha"
 
 [terminal]
 # new panes/tabs inherit cwd from the source pane/workspace
@@ -49,3 +49,12 @@ command = "hunk.diff.staged-tab"
 [ui]
 sidebar_width = 26
 agent_panel_sort = "spaces"
+
+# background notification popups: ask the outer terminal (ghostty) to raise
+# a desktop notification, so alerts surface on the local machine over ssh
+[ui.toast]
+delivery = "terminal"
+
+# play sounds when agents change state in background workspaces
+[ui.sound]
+enabled = true

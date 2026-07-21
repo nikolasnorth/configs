@@ -25,6 +25,9 @@ split_horizontal = "prefix+\""
 # matches tmux rename-window
 rename_tab = "prefix+,"
 
+# matches tmux rename-session
+rename_workspace = "prefix+$"
+
 # hunk: review-first diff viewer for agent-authored changesets (hunk.dev)
 # via edmundmiller/herdr-plugin-hunk (`herdr plugin install`), opens in a
 # new tab rather than a popup or split pane
@@ -45,3 +48,4 @@ command = "hunk.diff.staged-tab"
 
 [ui]
 sidebar_width = 26
+agent_panel_sort = "spaces"

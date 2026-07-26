@@ -38,7 +38,7 @@ navigate_pane_down = "down"
 
 [ui]
 sidebar_width = 26
-agent_panel_sort = "spaces"
+agent_panel_sort = "priority"
 
 # background notification popups: ask the outer terminal (ghostty) to raise
 # a desktop notification, so alerts surface on the local machine over ssh

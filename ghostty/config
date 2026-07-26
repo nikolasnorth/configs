@@ -1,20 +1,39 @@
 # font
 font-family = JetBrainsMono Nerd Font
 font-size = 13
+# uncomment to disable ligatures
+# font-feature = -liga,-calt,-dlig
 
 # theme
 theme = Catppuccin Mocha
+window-colorspace = display-p3
 
-# window
+# transparency
+background-opacity = 0.88
+background-blur = 25
+
+# window: minimal chrome, no titlebar
+macos-titlebar-style = hidden
 window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+window-decoration = auto
 confirm-close-surface = false
 quit-after-last-window-closed = true
 maximize = true
+resize-overlay = never
 
-# cursor
+# cursor: follows the theme instead of a fixed color
 cursor-style = block
 cursor-style-blink = false
-cursor-color = #a9b665
+cursor-color = cell-foreground
+cursor-text = cell-background
+mouse-hide-while-typing = true
+# keep the block cursor everywhere (no shell-driven bar cursor)
+shell-integration-features = no-cursor
+
+# macos
+macos-option-as-alt = true
 
 # bell: play macOS alert sound when a program rings the terminal bell
 # (attention/dock-bounce and 🔔 title prefix are on by default)
@@ -22,4 +41,3 @@ bell-features = system
 
 # fix shift+enter for claude code
 keybind = shift+enter=text:\x1b\r
-

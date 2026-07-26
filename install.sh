@@ -1,142 +1,98 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-# Parse arguments
-MODE=""
-for arg in "$@"; do
-    case $arg in
-        --home) MODE="home" ;;
-        --work) MODE="work" ;;
-    esac
-done
+usage() {
+    echo "Usage: ./install.sh [--personal]"
+    echo "  no argument  Link shared configuration"
+    echo "  --personal   Also link personal shell and Claude configuration"
+}
 
-if [ -z "$MODE" ]; then
-    echo "Usage: ./install.sh --home | --work"
-    echo "  --home  Install all tools including personal ones (Claude Code)"
-    echo "  --work  Install shared tools only"
-    exit 1
-fi
+PERSONAL=0
+case "$#" in
+    0) ;;
+    1)
+        case "$1" in
+            --personal) PERSONAL=1 ;;
+            -h|--help)
+                usage
+                exit 0
+                ;;
+            *)
+                usage >&2
+                exit 1
+                ;;
+        esac
+        ;;
+    *)
+        usage >&2
+        exit 1
+        ;;
+esac
 
 CONFIGS_DIR="$(cd "$(dirname "$0")" && pwd)"
 OS="$(uname -s)"
 
-echo "Installing configs from $CONFIGS_DIR (mode: $MODE)"
-echo "Detected OS: $OS"
+next_backup_path() {
+    local target="$1"
+    local backup="${target}.backup"
+    local suffix=1
 
-# Install Homebrew (macOS only)
-if [ "$OS" = "Darwin" ]; then
-    if ! command -v brew &> /dev/null; then
-        echo "Installing Homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+    while [ -e "$backup" ] || [ -L "$backup" ]; do
+        backup="${target}.backup.${suffix}"
+        suffix=$((suffix + 1))
+    done
+
+    printf '%s\n' "$backup"
+}
+
+link_config() {
+    local source="$1"
+    local target="$2"
+    local backup
+
+    if [ ! -e "$source" ] && [ ! -L "$source" ]; then
+        echo "Missing source: $source" >&2
+        return 1
     fi
-fi
 
-# Install tools via Homebrew (if available)
-if command -v brew &> /dev/null; then
-    echo "Installing tools..."
-    brew install bat eza fd fzf git-delta hunk neovim ripgrep tmux zoxide zsh
+    mkdir -p "$(dirname "$target")"
 
-    # macOS-only casks
-    if [ "$OS" = "Darwin" ]; then
-        brew install --cask font-jetbrains-mono-nerd-font ghostty raycast
+    if [ -L "$target" ]; then
+        if [ "$(readlink "$target")" = "$source" ]; then
+            echo "Already linked: $target"
+            return
+        fi
+        unlink "$target"
+    elif [ -e "$target" ]; then
+        backup="$(next_backup_path "$target")"
+        mv "$target" "$backup"
+        echo "Backed up: $target -> $backup"
     fi
 
-    # Home-only tools
-    if [ "$MODE" = "home" ]; then
-        curl -fsSL https://claude.ai/install.sh | bash
-    fi
-else
-    echo "Homebrew not found. Please install prerequisites manually (see TODO.md)"
+    ln -s "$source" "$target"
+    echo "Linked: $target -> $source"
+}
+
+echo "Linking shared configs from $CONFIGS_DIR"
+
+link_config "$CONFIGS_DIR/nvim/init.lua" "$HOME/.config/nvim/init.lua"
+link_config "$CONFIGS_DIR/bat/config" "$HOME/.config/bat/config"
+link_config "$CONFIGS_DIR/git/.gitconfig" "$HOME/.config/git/config"
+link_config "$CONFIGS_DIR/herdr/config.toml" "$HOME/.config/herdr/config.toml"
+link_config "$CONFIGS_DIR/hunk/config.toml" "$HOME/.config/hunk/config.toml"
+link_config "$CONFIGS_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
+link_config "$CONFIGS_DIR/tmux/scripts" "$HOME/.config/tmux/scripts"
+
+# Environment-specific overlays can own these entry points instead.
+if [ "$PERSONAL" -eq 1 ]; then
+    link_config "$CONFIGS_DIR/zsh/.zshrc" "$HOME/.zshrc"
+    link_config "$CONFIGS_DIR/claude/settings.json" "$HOME/.claude/settings.json"
+    link_config "$CONFIGS_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 fi
 
-# Clone fzf-git.sh (if not already present)
-if [ ! -d ~/.config/fzf-git.sh ]; then
-    echo "Cloning fzf-git.sh..."
-    git clone https://github.com/junegunn/fzf-git.sh.git ~/.config/fzf-git.sh
-fi
-
-# Back up existing config files if they're real files (not symlinks)
-if [ -f ~/.zshrc ] && [ ! -L ~/.zshrc ]; then
-    cp ~/.zshrc ~/.zshrc.backup
-    echo "Backed up existing ~/.zshrc to ~/.zshrc.backup"
-fi
-
-# Create symlinks (both macOS and Linux)
-echo "Creating symlinks..."
-ln -sf "$CONFIGS_DIR/zsh/.zshrc" ~/.zshrc
-ln -sf "$CONFIGS_DIR/tmux/.tmux.conf" ~/.tmux.conf
-mkdir -p ~/.config/nvim
-ln -sf "$CONFIGS_DIR/nvim/init.lua" ~/.config/nvim/init.lua
-mkdir -p ~/.config/bat
-ln -sf "$CONFIGS_DIR/bat/config" ~/.config/bat/config
-mkdir -p ~/.claude
-ln -sf "$CONFIGS_DIR/claude/settings.json" ~/.claude/settings.json
-
-# Home-only symlinks
-if [ "$MODE" = "home" ]; then
-    mkdir -p ~/.claude
-    ln -sf "$CONFIGS_DIR/claude/CLAUDE.md" ~/.claude/CLAUDE.md
-fi
-
-# Ghostty config (macOS only)
 if [ "$OS" = "Darwin" ]; then
-    mkdir -p ~/.config/ghostty
-    ln -sf "$CONFIGS_DIR/ghostty/config" ~/.config/ghostty/config
+    link_config "$CONFIGS_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 fi
 
-# Herdr config (if installed)
-if command -v herdr &> /dev/null; then
-    mkdir -p ~/.config/herdr
-    ln -sf "$CONFIGS_DIR/herdr/config.toml" ~/.config/herdr/config.toml
-    herdr plugin install edmundmiller/herdr-plugin-hunk --yes
-fi
-
-# Hunk config and bundled Claude Code skill (if installed)
-if command -v hunk &> /dev/null; then
-    mkdir -p ~/.config/hunk
-    ln -sf "$CONFIGS_DIR/hunk/config.toml" ~/.config/hunk/config.toml
-    mkdir -p ~/.claude/skills
-    ln -sf "$(brew --prefix hunk)/libexec/skills/hunk-review" ~/.claude/skills/hunk-review
-fi
-
-# Add git config include (if not already present)
-if ! grep -q "path = $CONFIGS_DIR/git/.gitconfig" ~/.gitconfig 2>/dev/null; then
-    echo "" >> ~/.gitconfig
-    echo "[include]" >> ~/.gitconfig
-    echo "	path = $CONFIGS_DIR/git/.gitconfig" >> ~/.gitconfig
-fi
-
-# macOS-specific settings
-if [ "$OS" = "Darwin" ]; then
-    # Faster key repeat rate (requires logout, macOS loads these at login)
-    defaults write NSGlobalDomain KeyRepeat -int 2
-    defaults write NSGlobalDomain InitialKeyRepeat -int 15
-fi
-
-
-echo ""
-echo "Done!"
-echo ""
-echo "Symlinks created:"
-echo "  ~/.zshrc -> $CONFIGS_DIR/zsh/.zshrc"
-echo "  ~/.tmux.conf -> $CONFIGS_DIR/tmux/.tmux.conf"
-echo "  ~/.config/nvim/init.lua -> $CONFIGS_DIR/nvim/init.lua"
-if [ "$OS" = "Darwin" ]; then
-    echo "  ~/.config/ghostty/config -> $CONFIGS_DIR/ghostty/config"
-fi
-if command -v herdr &> /dev/null; then
-    echo "  ~/.config/herdr/config.toml -> $CONFIGS_DIR/herdr/config.toml"
-fi
-echo ""
-echo "Git config included from:"
-echo "  $CONFIGS_DIR/git/.gitconfig"
-echo ""
-echo "To apply changes, run: source ~/.zshrc"
-if [ "$OS" = "Darwin" ]; then
-    echo ""
-    echo "NOTE: Log out and back in for key repeat settings to take effect."
-    echo ""
-    echo "Raycast: Open Raycast to complete setup"
-fi
+echo "Done. Install applications and command-line dependencies separately."

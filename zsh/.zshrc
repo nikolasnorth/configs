@@ -47,8 +47,8 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 # fzf - fuzzy finder
-eval "$(fzf --zsh)"
-source ~/.config/fzf-git.sh/fzf-git.sh
+(( $+commands[fzf] )) && eval "$(fzf --zsh)"
+[[ -r ~/.config/fzf-git.sh/fzf-git.sh ]] && source ~/.config/fzf-git.sh/fzf-git.sh
 
 # use fd with fzf
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
@@ -70,7 +70,7 @@ _fzf_compgen_dir() {
 export PATH="$HOME/.local/bin:$PATH"
 
 # zoxide - smarter cd
-eval "$(zoxide init zsh)"
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 
 # source local config if exists (for machine-specific stuff)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

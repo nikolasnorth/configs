@@ -17,14 +17,27 @@ vim.g.mapleader = " "
 
 -- Install plugins (if not already installed)
 require("lazy").setup({
-  -- TODO: re-enable once nvim-treesitter API stabilizes
-  -- {
-  --   "nvim-treesitter/nvim-treesitter",
-  --   build = ":TSUpdate",
-  --   lazy = false,
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    -- master is frozen but stable; main requires nvim 0.12+ APIs (vim.list)
+    branch = "master",
+    build = ":TSUpdate",
+    lazy = false,
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = { "java", "python", "bash", "json", "yaml", "lua", "markdown", "markdown_inline" },
+        highlight = { enable = true },
+      })
+    end,
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = "markdown",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {},
+  },
   { "nvim-lualine/lualine.nvim" },  -- status line
-  { "sainnhe/gruvbox-material" },
+  { "catppuccin/nvim", name = "catppuccin" },
   {
     "numToStr/Comment.nvim",
     lazy = false,
@@ -61,6 +74,17 @@ require("lazy").setup({
       { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent files" },
     },
   },
+  { "neovim/nvim-lspconfig" },
+  { "mfussenegger/nvim-jdtls", ft = "java" },  -- config lives in ftplugin/java.lua
+  {
+    "saghen/blink.cmp",
+    version = "1.*",  -- pin to release so the prebuilt fuzzy-matcher binary is used
+    event = "InsertEnter",
+    opts = {
+      keymap = { preset = "default" },
+      completion = { documentation = { auto_show = true } },
+    },
+  },
   {
     "folke/which-key.nvim",
     lazy = false,
@@ -73,7 +97,7 @@ require("lazy").setup({
   },
 }, {
     defaults = { lazy = true },
-    install = { colorscheme = { "gruvbox-material" } },
+    install = { colorscheme = { "catppuccin-mocha" } },
     ui = { open_on_start = false },  -- <--- this disables the dashboard
 })
 
@@ -91,6 +115,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
     vim.opt_local.signcolumn = "yes"
   end
 })
+
+-- Multiplexers can inhibit OSC 52 clipboard detection over SSH.
+if vim.env.SSH_TTY then
+  vim.g.clipboard = "osc52"
+end
 
 -- Use system clipboard
 vim.opt.clipboard = "unnamedplus"
@@ -115,23 +144,69 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Keep cursor away from edges when scrolling
 vim.opt.scrolloff = 8
 
+-- Word-aware line wrapping; preserve indent on wrapped lines
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.sidescroll = 1
+vim.opt.sidescrolloff = 8
+
 -- Persistent undo (survives closing file)
 vim.opt.undofile = true
 
 -- Auto-reload files changed outside of nvim
 vim.opt.autoread = true
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+vim.opt.updatetime = 250
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
   command = "checktime",
 })
 
--- Gruvbox Material Dark theme
+-- Catppuccin Mocha theme
 vim.opt.background = "dark"
-vim.g.gruvbox_material_background = "medium"
-vim.g.gruvbox_material_foreground = "material"
-vim.cmd("colorscheme gruvbox-material")
+vim.opt.termguicolors = true
+vim.cmd("colorscheme catppuccin-mocha")
 
 -- Status line
 require("lualine").setup({
-  options = { theme = "gruvbox-material" }
+  options = { theme = "auto" }
 })
 
+-- ========================= LSP =========================
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local buf = args.buf
+    local map = function(lhs, rhs, desc)
+      vim.keymap.set("n", lhs, rhs, { buffer = buf, desc = desc })
+    end
+    map("gd", vim.lsp.buf.definition, "Goto definition")
+    map("gD", vim.lsp.buf.declaration, "Goto declaration")
+    map("gri", vim.lsp.buf.implementation, "Goto implementation")
+    map("grr", "<cmd>FzfLua lsp_references<cr>", "References")
+    map("grn", vim.lsp.buf.rename, "Rename symbol")
+    map("gra", vim.lsp.buf.code_action, "Code action")
+    map("<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", "Document symbols")
+    map("<leader>fS", "<cmd>FzfLua lsp_live_workspace_symbols<cr>", "Workspace symbols")
+    map("<leader>e", vim.diagnostic.open_float, "Show diagnostic")
+  end,
+})
+
+vim.diagnostic.config({
+  virtual_text = true,
+  severity_sort = true,
+})
+
+-- Non-Java servers (jdtls is handled by nvim-jdtls in ftplugin/java.lua).
+-- Each is enabled only if its binary is installed.
+local servers = { "lua_ls", "pyright", "bashls" }
+local server_bins = { lua_ls = "lua-language-server", pyright = "pyright-langserver", bashls = "bash-language-server" }
+for _, server in ipairs(servers) do
+  if vim.fn.executable(server_bins[server]) == 1 then
+    vim.lsp.enable(server)
+  end
+end
+
+local work_config = vim.fn.expand("~/.config/nvim/work.lua")
+if vim.fn.filereadable(work_config) == 1 then
+  dofile(work_config)
+end

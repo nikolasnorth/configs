@@ -8,7 +8,7 @@ Personal dotfiles for macOS and Linux.
 |--------|-------------|
 | `zsh/.zshrc` | Zsh with fzf, eza, and zoxide |
 | `tmux/.tmux.conf` | tmux with vim keys, prefix `Ctrl+Space` |
-| `nvim/init.lua` | Neovim with treesitter, gitsigns, lualine |
+| `nvim/init.lua` | Neovim with treesitter, LSP, completion, and fuzzy finding |
 | `ghostty/config` | Ghostty terminal (macOS only) |
 | `bat/config` | bat with gruvbox theme |
 | `git/.gitconfig` | Shared git settings |
@@ -19,20 +19,18 @@ Personal dotfiles for macOS and Linux.
 ## Install
 
 ```bash
-git clone https://github.com/nikolas/configs.git ~/code/configs
+git clone https://github.com/nikolasnorth/configs.git ~/code/configs
 cd ~/code/configs
-./install.sh --home   # personal machine (includes Claude Code)
-./install.sh --work   # work machine
+./install.sh              # shared configuration
+./install.sh --personal   # shared plus personal configuration
 ```
 
-**macOS:** Automatically installs Homebrew, then installs tools via brew.
+The setup script only backs up conflicting files and creates configuration
+symlinks. It does not install applications, plugins, packages, or command-line
+dependencies.
 
-**Linux:** Requires Homebrew to be installed first:
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-```
-Then run `./install.sh` to install tools via brew.
+On a work machine, run `~/code/Nnorth/install.sh` afterward to add the private
+work overlay.
 
 ## Key Bindings
 
@@ -62,11 +60,14 @@ Then run `./install.sh` to install tools via brew.
 | Comment.nvim | Toggle comments (`gcc`) |
 | nvim-autopairs | Auto-close brackets, quotes |
 | lualine.nvim | Status line |
-| gruvbox-material | Theme |
+| nvim-lspconfig / nvim-jdtls | Language server support |
+| blink.cmp | Completion |
+| render-markdown.nvim | Markdown rendering |
+| catppuccin | Theme |
 
 ## Theme
 
-Gruvbox Material Dark across all tools:
-- Terminal: Ghostty built-in theme
-- Neovim: `sainnhe/gruvbox-material`
-- tmux: Custom status bar colors
+- Ghostty and Neovim: Catppuccin Mocha
+- Herdr: Catppuccin Mocha accent
+- bat: Gruvbox Dark
+- tmux: Custom dark status bar

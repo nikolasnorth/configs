@@ -37,8 +37,18 @@ navigate_pane_up = "up"
 navigate_pane_down = "down"
 
 [ui]
+# highlights, borders, nav UI (catppuccin-mocha peach)
+accent = "#fab387"
 sidebar_width = 26
 agent_panel_sort = "priority"
+show_agent_labels_on_pane_borders = false
+
+# blank row between sidebar entries for readability
+[ui.sidebar.spaces]
+row_gap = 1
+
+[ui.sidebar.agents]
+row_gap = 1
 
 # background notification popups: ask the outer terminal (ghostty) to raise
 # a desktop notification, so alerts surface on the local machine over ssh

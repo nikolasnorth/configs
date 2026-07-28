@@ -46,10 +46,6 @@ precmd_functions+=(reset_cursor)
 export EDITOR="nvim"
 export VISUAL="nvim"
 
-# fzf - fuzzy finder
-(( $+commands[fzf] )) && eval "$(fzf --zsh)"
-[[ -r ~/.config/fzf-git.sh/fzf-git.sh ]] && source ~/.config/fzf-git.sh/fzf-git.sh
-
 # use fd with fzf
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_DEFAULT_OPTS="--bind=ctrl-j:down,ctrl-k:up"
@@ -74,3 +70,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # source local config if exists (for machine-specific stuff)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# load fzf after local config has initialized package-manager paths
+(( $+commands[fzf] )) && eval "$(fzf --zsh)"
+[[ -r ~/.config/fzf-git.sh/fzf-git.sh ]] && source ~/.config/fzf-git.sh/fzf-git.sh

@@ -116,8 +116,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end
 })
 
--- Multiplexers can inhibit OSC 52 clipboard detection over SSH.
-if vim.env.SSH_TTY then
+-- Multiplexers can inhibit OSC 52 detection, and Herdr panes omit SSH_TTY.
+if vim.env.SSH_TTY or vim.env.HERDR_ENV then
   vim.g.clipboard = "osc52"
 end
 

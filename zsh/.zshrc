@@ -2,6 +2,7 @@
 [[ -f ~/.zshrc.pre ]] && source ~/.zshrc.pre
 
 # alias
+alias cat='bat'
 alias ll='eza -la --icons --git --group-directories-first --time-style=relative'
 alias lt='eza --tree --icons --git --level=2'
 alias ca='claude agents'
@@ -65,12 +66,10 @@ _fzf_compgen_dir() {
 # add ~/.local/bin to PATH (used by Claude Code native install)
 export PATH="$HOME/.local/bin:$PATH"
 
-# zoxide - smarter cd
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
-
 # source local config if exists (for machine-specific stuff)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
-# load fzf after local config has initialized package-manager paths
+# load tools after local config has initialized package-manager paths
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 (( $+commands[fzf] )) && eval "$(fzf --zsh)"
 [[ -r ~/.config/fzf-git.sh/fzf-git.sh ]] && source ~/.config/fzf-git.sh/fzf-git.sh

@@ -166,6 +166,23 @@ vim.opt.background = "dark"
 vim.opt.termguicolors = true
 vim.cmd("colorscheme catppuccin-mocha")
 
+local function transparent_background()
+  for _, group in ipairs({
+    "Normal",
+    "NormalNC",
+    "SignColumn",
+    "EndOfBuffer",
+    "MsgArea",
+  }) do
+    vim.cmd(("highlight %s guibg=NONE ctermbg=NONE"):format(group))
+  end
+end
+
+transparent_background()
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = transparent_background,
+})
+
 -- Status line
 require("lualine").setup({
   options = { theme = "auto" }

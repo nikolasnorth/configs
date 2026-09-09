@@ -4,8 +4,12 @@ onboarding = false
 
 [theme]
 name = "catppuccin-mocha"
-
 auto_switch = false
+
+[theme.custom]
+active_row_bg = "#342d33"
+selection_bg = "#46383a"
+
 [terminal]
 # new panes/tabs inherit cwd from the source pane/workspace
 new_cwd = "follow"
@@ -50,11 +54,11 @@ row_gap = 1
 [ui.sidebar.agents]
 row_gap = 1
 
-# background notification popups: ask the outer terminal (ghostty) to raise
-# a desktop notification, so alerts surface on the local machine over ssh
+# Background notification popups: ask the outer terminal (Ghostty) to raise
+# a desktop notification, so alerts surface on the local machine over SSH.
 [ui.toast]
 delivery = "terminal"
 
-# play sounds when agents change state in background workspaces
+# Play sounds when agents change state in background workspaces.
 [ui.sound]
 enabled = true

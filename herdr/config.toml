@@ -41,8 +41,8 @@ navigate_pane_up = "up"
 navigate_pane_down = "down"
 
 [ui]
-# highlights, borders, nav UI (catppuccin-mocha peach)
-accent = "#fab387"
+# highlights, borders, nav UI (Claude Copper, matches Claude Code's accent)
+accent = "#d77757"
 sidebar_width = 26
 agent_panel_sort = "priority"
 show_agent_labels_on_pane_borders = false

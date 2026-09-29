@@ -35,9 +35,9 @@ shell-integration-features = no-cursor
 # macos
 macos-option-as-alt = true
 
-# bell: play macOS alert sound when a program rings the terminal bell
-# (attention/dock-bounce and 🔔 title prefix are on by default)
-bell-features = system
+# bell: no alert sound or Dock bounce; herdr toasts already surface agent
+# alerts (🔔 title prefix stays on by default)
+bell-features = no-system,no-attention
 
 # fix shift+enter for claude code
 keybind = shift+enter=text:\x1b\r

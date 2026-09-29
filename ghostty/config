@@ -8,10 +8,6 @@ font-size = 13
 theme = Catppuccin Mocha
 window-colorspace = display-p3
 
-# transparency
-background-opacity = 0.88
-background-blur = 25
-
 # window: minimal chrome, no titlebar
 macos-titlebar-style = hidden
 window-padding-x = 10

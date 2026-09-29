@@ -19,14 +19,17 @@ vim.g.mapleader = " "
 require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
-    -- master is frozen but stable; main requires nvim 0.12+ APIs (vim.list)
-    branch = "master",
+    -- main requires nvim 0.12+ and tree-sitter-cli; master is frozen and breaks on 0.12
+    branch = "main",
     build = ":TSUpdate",
     lazy = false,
     config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = { "java", "python", "bash", "json", "yaml", "lua", "markdown", "markdown_inline" },
-        highlight = { enable = true },
+      require("nvim-treesitter").install({ "java", "python", "bash", "json", "yaml", "lua", "markdown", "markdown_inline" })
+      -- highlight any filetype that has a parser; buffers without one are skipped
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
+        end,
       })
     end,
   },

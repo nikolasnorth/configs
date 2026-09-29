@@ -59,6 +59,6 @@ row_gap = 1
 [ui.toast]
 delivery = "terminal"
 
-# Play sounds when agents change state in background workspaces.
+# Sounds are on by default; mute them and rely on the toast notifications.
 [ui.sound]
-enabled = true
+enabled = false

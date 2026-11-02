@@ -93,6 +93,17 @@ fi
 
 if [ "$OS" = "Darwin" ]; then
     link_config "$CONFIGS_DIR/ghostty/config" "$HOME/.config/ghostty/config"
+
+    if [ "$PERSONAL" -eq 1 ]; then
+        HERDR_APP="$HOME/.config/herdr-app"
+        link_config "$CONFIGS_DIR/herdr-app/keys.json" "$HERDR_APP/keys.json"
+        link_config "$CONFIGS_DIR/herdr-app/settings.json" "$HERDR_APP/settings.json"
+        link_config "$CONFIGS_DIR/herdr-app/layouts/compact.json" "$HERDR_APP/layouts/compact.json"
+        for mod in "$CONFIGS_DIR"/herdr-app/mods/*/; do
+            mod="$(basename "$mod")"
+            link_config "$CONFIGS_DIR/herdr-app/mods/$mod" "$HERDR_APP/mods/$mod"
+        done
+    fi
 fi
 
 echo "Done. Install applications and command-line dependencies separately."

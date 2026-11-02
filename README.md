@@ -16,6 +16,7 @@ Personal dotfiles for macOS and Linux.
 | `claude/CLAUDE.md` | Claude Code instructions (Conventional Commits) |
 | `codex/config.toml` | Codex CLI approval and Auto-review settings |
 | `herdr/config.toml` | Herdr terminal workspace manager |
+| `herdr-app/` | Herdr desktop app: keys, settings, `compact` layout, custom mods (macOS, `--personal`) |
 
 ## Install
 

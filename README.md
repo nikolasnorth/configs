@@ -7,7 +7,6 @@ Personal dotfiles for macOS and Linux.
 | Config | Description |
 |--------|-------------|
 | `zsh/.zshrc` | Zsh with fzf, eza, and zoxide |
-| `tmux/.tmux.conf` | tmux with vim keys, prefix `Ctrl+Space` |
 | `nvim/init.lua` | Neovim with treesitter, LSP, completion, and fuzzy finding |
 | `ghostty/config` | Ghostty terminal (macOS only) |
 | `bat/config` | bat with gruvbox theme |
@@ -15,8 +14,6 @@ Personal dotfiles for macOS and Linux.
 | `claude/settings.json` | Claude Code settings |
 | `claude/CLAUDE.md` | Claude Code instructions (Conventional Commits) |
 | `codex/config.toml` | Codex CLI approval and Auto-review settings |
-| `herdr/config.toml` | Herdr terminal workspace manager |
-| `herdr-app/` | Herdr desktop app: keys, settings, `compact` layout, custom mods (macOS, `--personal`) |
 
 ## Install
 
@@ -35,12 +32,6 @@ On a work machine, run `~/code/Nnorth/install.sh` afterward to add the private
 work overlay.
 
 ## Key Bindings
-
-**tmux** (prefix: `Ctrl+Space`)
-- `h/j/k/l` - navigate panes
-- `|` - split horizontal
-- `-` - split vertical
-- `r` - reload config
 
 **nvim** (leader: `Space`)
 - `Space ff` - find files
@@ -70,6 +61,4 @@ work overlay.
 ## Theme
 
 - Ghostty and Neovim: Catppuccin Mocha
-- Herdr: Catppuccin Mocha accent
 - bat: Gruvbox Dark
-- tmux: Custom dark status bar

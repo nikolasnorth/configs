@@ -79,10 +79,6 @@ echo "Linking shared configs from $CONFIGS_DIR"
 link_config "$CONFIGS_DIR/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 link_config "$CONFIGS_DIR/bat/config" "$HOME/.config/bat/config"
 link_config "$CONFIGS_DIR/git/.gitconfig" "$HOME/.config/git/config"
-link_config "$CONFIGS_DIR/herdr/config.toml" "$HOME/.config/herdr/config.toml"
-link_config "$CONFIGS_DIR/hunk/config.toml" "$HOME/.config/hunk/config.toml"
-link_config "$CONFIGS_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
-link_config "$CONFIGS_DIR/tmux/scripts" "$HOME/.config/tmux/scripts"
 
 # Environment-specific overlays can own these entry points instead.
 if [ "$PERSONAL" -eq 1 ]; then
@@ -93,17 +89,6 @@ fi
 
 if [ "$OS" = "Darwin" ]; then
     link_config "$CONFIGS_DIR/ghostty/config" "$HOME/.config/ghostty/config"
-
-    if [ "$PERSONAL" -eq 1 ]; then
-        HERDR_APP="$HOME/.config/herdr-app"
-        link_config "$CONFIGS_DIR/herdr-app/keys.json" "$HERDR_APP/keys.json"
-        link_config "$CONFIGS_DIR/herdr-app/settings.json" "$HERDR_APP/settings.json"
-        link_config "$CONFIGS_DIR/herdr-app/layouts/compact.json" "$HERDR_APP/layouts/compact.json"
-        for mod in "$CONFIGS_DIR"/herdr-app/mods/*/; do
-            mod="$(basename "$mod")"
-            link_config "$CONFIGS_DIR/herdr-app/mods/$mod" "$HERDR_APP/mods/$mod"
-        done
-    fi
 fi
 
 echo "Done. Install applications and command-line dependencies separately."

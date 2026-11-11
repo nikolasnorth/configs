@@ -1,7 +1,3 @@
 # macos
 .DS_Store
 
-
-# herdr-app: rewritten by Herdr on start
-herdr-app/mods/*/gpui-kit.d.ts
-herdr-app/mods/*/jsconfig.json

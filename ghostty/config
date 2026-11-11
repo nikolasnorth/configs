@@ -31,8 +31,7 @@ shell-integration-features = no-cursor
 # macos
 macos-option-as-alt = true
 
-# bell: no alert sound or Dock bounce; herdr toasts already surface agent
-# alerts (🔔 title prefix stays on by default)
+# bell: no alert sound or Dock bounce (🔔 title prefix stays on by default)
 bell-features = no-system,no-attention
 
 # fix shift+enter for claude code

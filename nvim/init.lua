@@ -24,7 +24,12 @@ require("lazy").setup({
     build = ":TSUpdate",
     lazy = false,
     config = function()
-      require("nvim-treesitter").install({ "java", "python", "bash", "json", "yaml", "lua", "markdown", "markdown_inline" })
+      local ts = require("nvim-treesitter")
+      if not ts.install then
+        vim.notify("nvim-treesitter: needs nvim 0.12+ and the main branch (run :Lazy update nvim-treesitter)", vim.log.levels.WARN)
+        return
+      end
+      ts.install({ "java", "python", "bash", "json", "yaml", "lua", "markdown", "markdown_inline" })
       -- highlight any filetype that has a parser; buffers without one are skipped
       vim.api.nvim_create_autocmd("FileType", {
         callback = function(args)

@@ -7,7 +7,7 @@ Personal dotfiles for macOS and Linux.
 | Config | Description |
 |--------|-------------|
 | `zsh/.zshrc` | Zsh with fzf, eza, and zoxide |
-| `nvim/init.lua` | Neovim with treesitter, LSP, completion, and fuzzy finding |
+| `nvim/init.lua` | Neovim with treesitter, LSP, completion, and fuzzy finding (needs nvim 0.12+ and `tree-sitter-cli`) |
 | `ghostty/config` | Ghostty terminal (macOS only) |
 | `bat/config` | bat with gruvbox theme |
 | `git/.gitconfig` | Shared git settings |
